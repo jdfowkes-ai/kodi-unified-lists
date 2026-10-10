@@ -1,0 +1,32 @@
+
+<?xml version="1.0" encoding="UTF-8"?>
+<addons>
+  <addon
+    id="plugin.program.unifiedlists"
+    name="Unified Local List Manager"
+    version="0.1.0"
+    provider-name="jdfowkes-ai">
+
+    <requires>
+      <import addon="xbmc.python" version="3.0.0"/>
+    </requires>
+
+    <extension
+      point="xbmc.python.pluginsource"
+      library="default.py">
+      <provides>executable</provides>
+    </extension>
+
+    <extension point="xbmc.addon.metadata">
+      <summary lang="en_GB">
+        Unified lists for Kodi Omega
+      </summary>
+      <description lang="en_GB">
+        Local watchlists, favourites,
+        library management and playback tracking.
+      </description>
+      <platform>all</platform>
+      <license>MIT</license>
+    </extension>
+  </addon>
+</addons>
