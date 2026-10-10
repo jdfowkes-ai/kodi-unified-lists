@@ -1,0 +1,49 @@
+
+name: Package Kodi Repository
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - repository.unifiedlists/**
+      - plugin.program.unifiedlists-0.1.0.zip
+      - .github/workflows/package-repository.yml
+
+permissions:
+  contents: write
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build repository ZIP
+        run: |
+          test -f repository.unifiedlists/addon.xml
+          test -f plugin.program.unifiedlists-0.1.0.zip
+
+          mkdir -p plugin.program.unifiedlists
+
+          cp plugin.program.unifiedlists-0.1.0.zip \
+            plugin.program.unifiedlists/
+
+          zip -r repository.unifiedlists-1.0.0.zip \
+            repository.unifiedlists
+
+      - name: Publish ZIP files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add repository.unifiedlists-1.0.0.zip
+          git add plugin.program.unifiedlists/
+
+          if ! git diff --cached --quiet; then
+            git commit -m "Publish Kodi repository packages"
+            git push
+          fi
