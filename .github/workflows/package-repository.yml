@@ -1,4 +1,5 @@
 
+
 name: Package Kodi Repository
 
 on:
@@ -7,12 +8,16 @@ on:
     branches:
       - main
     paths:
-      - repository.unifiedlists/**
-      - plugin.program.unifiedlists-0.1.0.zip
-      - .github/workflows/package-repository.yml
+      - 'plugin.program.unifiedlists-*.zip'
+      - 'repository.unifiedlists/**'
+      - '.github/workflows/package-repository.yml'
 
 permissions:
   contents: write
+
+concurrency:
+  group: kodi-repository-publish
+  cancel-in-progress: false
 
 jobs:
   package:
@@ -21,29 +26,65 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Build repository ZIP
+        shell: bash
         run: |
+          set -euo pipefail
+
           test -f repository.unifiedlists/addon.xml
-          test -f plugin.program.unifiedlists-0.1.0.zip
+
+          VERSION=$(python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          root = ET.parse('addons.xml').getroot()
+          addon = next(
+              a for a in root.findall('addon')
+              if a.get('id') == 'plugin.program.unifiedlists'
+          )
+          print(addon.get('version'))
+          PY
+          )
+
+          ZIP="plugin.program.unifiedlists-${VERSION}.zip"
+          test -f "$ZIP"
 
           mkdir -p plugin.program.unifiedlists
+          cp "$ZIP" plugin.program.unifiedlists/
 
-          cp plugin.program.unifiedlists-0.1.0.zip \
-            plugin.program.unifiedlists/
-
-          zip -r repository.unifiedlists-1.0.0.zip \
+          zip -r -q repository.unifiedlists-1.0.0.zip \
             repository.unifiedlists
 
       - name: Publish ZIP files
+        shell: bash
         run: |
+          set -euo pipefail
+
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.email \
+            "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add repository.unifiedlists-1.0.0.zip
           git add plugin.program.unifiedlists/
 
-          if ! git diff --cached --quiet; then
-            git commit -m "Publish Kodi repository packages"
-            git push
+          if git diff --cached --quiet; then
+            echo "No package changes."
+            exit 0
           fi
+
+          git commit -m "Publish Kodi repository packages"
+
+          for attempt in 1 2 3 4 5; do
+            if git pull --rebase origin main &&
+               git push origin HEAD:main; then
+              echo "Published successfully."
+              exit 0
+            fi
+
+            git rebase --abort 2>/dev/null || true
+            sleep 3
+          done
+
+          echo "Publishing failed after five attempts."
+          exit 1
