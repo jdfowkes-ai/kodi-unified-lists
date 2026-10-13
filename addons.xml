@@ -1,7 +1,7 @@
 <addons>
   <addon id="plugin.program.unifiedlists"
          name="Unified Local List Manager"
-         version="0.3.10"
+         version="0.3.11"
          provider-name="Kodi Unified Lists">
 
     <requires>
