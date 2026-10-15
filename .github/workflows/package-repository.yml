@@ -1,5 +1,4 @@
 
-
 name: Package Kodi Repository
 
 on:
@@ -8,6 +7,7 @@ on:
     branches:
       - main
     paths:
+      - 'addons.xml'
       - 'plugin.program.unifiedlists-*.zip'
       - 'repository.unifiedlists/**'
       - '.github/workflows/package-repository.yml'
