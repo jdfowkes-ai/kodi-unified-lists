@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <addons>
-  <addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.4.4" provider-name="Kodi Unified Lists">
+  <addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.5.0" provider-name="Kodi Unified Lists">
     <requires>
       <import addon="xbmc.python" version="3.0.0" />
     </requires>
@@ -12,14 +12,14 @@
       <menu id="kodi.core.main">
         <item library="context_actions.py">
           <label>Unified Lists</label>
-          <visible>String.StartsWith(ListItem.Path,plugin://plugin.video.umbrella/) + [String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie)]</visible>
+          <visible>String.StartsWith(ListItem.Path,plugin://plugin.video.umbrella/)</visible>
         </item>
       </menu>
     </extension>
     <extension point="xbmc.service" library="service.py" start="startup" />
     <extension point="xbmc.addon.metadata">
       <summary lang="en_GB">Local playback progress and watch lists for Kodi</summary>
-      <description lang="en_GB">Tracks confirmed playback in a local database, launches resume playback through Umbrella, and mirrors local progress markers into Umbrella's per-addon progress stores. Continue Watching, Watch Later and Favourites do not require Kodi VideoLibrary or Trakt.</description>
+      <description lang="en_GB">Uses Kodi Video Library STRM entries and native resume points for Continue Watching. Watch Later and Favourites remain local lists, and Umbrella handles library STRM creation and playback.</description>
       <platform>all</platform>
       <license>MIT</license>
     </extension>
