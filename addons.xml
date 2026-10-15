@@ -1,6 +1,6 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version="1.0" encoding="UTF-8"?>
 <addons>
-  <addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.5.0" provider-name="Kodi Unified Lists">
+  <addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.5.2" provider-name="Kodi Unified Lists">
     <requires>
       <import addon="xbmc.python" version="3.0.0" />
     </requires>
@@ -11,15 +11,14 @@
     <extension point="kodi.context.item">
       <menu id="kodi.core.main">
         <item library="context_actions.py">
-          <label>Unified Lists</label>
-          <visible>String.StartsWith(ListItem.Path,plugin://plugin.video.umbrella/)</visible>
+          <label>Watch Later</label>
+          <visible>String.StartsWith(ListItem.Path,plugin://plugin.video.umbrella/) + [String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,tvshow)]</visible>
         </item>
       </menu>
     </extension>
-    <extension point="xbmc.service" library="service.py" start="startup" />
     <extension point="xbmc.addon.metadata">
-      <summary lang="en_GB">Local playback progress and watch lists for Kodi</summary>
-      <description lang="en_GB">Uses Kodi Video Library STRM entries and native resume points for Continue Watching. Watch Later and Favourites remain local lists, and Umbrella handles library STRM creation and playback.</description>
+      <summary lang="en_GB">Umbrella playback lists and Watch Later</summary>
+      <description lang="en_GB">Opens Umbrella local Finish Watching and Favourites folders, and adds Umbrella items to a local Watch Later list from the main context menu. Umbrella handles item playback.</description>
       <platform>all</platform>
       <license>MIT</license>
     </extension>
