@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-  <addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.5.2" provider-name="Kodi Unified Lists">
+  <addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.5.3" provider-name="Kodi Unified Lists">
     <requires>
       <import addon="xbmc.python" version="3.0.0" />
     </requires>
@@ -18,7 +18,7 @@
     </extension>
     <extension point="xbmc.addon.metadata">
       <summary lang="en_GB">Umbrella playback lists and Watch Later</summary>
-      <description lang="en_GB">Opens Umbrella local Finish Watching and Favourites folders, and adds Umbrella items to a local Watch Later list from the main context menu. Umbrella handles item playback.</description>
+      <description lang="en_GB">Combines Umbrella local movie and episode progress in one Continue Watching list. OK opens a concise action menu; Umbrella handles playback and resume.</description>
       <platform>all</platform>
       <license>MIT</license>
     </extension>
