@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <addons>
-  <addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.5.4" provider-name="Kodi Unified Lists">
+  <addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.5.5" provider-name="Kodi Unified Lists">
     <requires>
       <import addon="xbmc.python" version="3.0.0" />
     </requires>
@@ -8,6 +8,7 @@
       <provides>executable</provides>
     </extension>
     <extension point="xbmc.python.script" library="context_actions.py" />
+    <extension point="xbmc.service" library="resume_service.py" start="startup" />
     <extension point="kodi.context.item">
       <menu id="kodi.core.main">
         <item library="context_actions.py">
