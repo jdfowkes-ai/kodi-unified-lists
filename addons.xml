@@ -1,27 +1,25 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<addons>
-  <addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.7.0" provider-name="Kodi Unified Lists">
-    <requires>
-      <import addon="xbmc.python" version="3.0.0" />
-    </requires>
-    <extension point="xbmc.python.pluginsource" library="default.py">
-      <provides>executable</provides>
-    </extension>
-    <extension point="xbmc.python.script" library="context_actions.py" />
-    <extension point="xbmc.service" library="resume_service.py" start="startup" />
-    <extension point="kodi.context.item">
-      <menu id="kodi.core.main">
-        <item library="context_actions.py">
-          <label>Watch Later</label>
-          <visible>String.StartsWith(ListItem.Path,plugin://plugin.video.umbrella/) + [String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,tvshow)]</visible>
-        </item>
-      </menu>
-    </extension>
-    <extension point="xbmc.addon.metadata">
-      <summary lang="en_GB">Umbrella playback lists and Watch Later</summary>
-      <description lang="en_GB">Combines Umbrella local movie and episode progress in one Continue Watching list. OK opens a concise action menu; Umbrella handles playback and resume.</description>
-      <platform>all</platform>
-      <license>MIT</license>
-    </extension>
-  </addon>
-</addons>
+<?xml version='1.0' encoding='utf-8'?>
+<addons><addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.7.1" provider-name="Kodi Unified Lists">
+  <requires>
+    <import addon="xbmc.python" version="3.0.0" />
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.python.script" library="context_actions.py" />
+  <extension point="xbmc.service" library="resume_service.py" start="startup" />
+  <extension point="kodi.context.item">
+    <menu id="kodi.core.main">
+      <item library="context_actions.py">
+        <label>Watch Later</label>
+        <visible>String.StartsWith(ListItem.Path,plugin://plugin.video.umbrella/) + [String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,tvshow)]</visible>
+      </item>
+    </menu>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en_GB">Umbrella spotlight feeds, local lists, apps and icons</summary>
+    <description lang="en_GB">Provides per-app Arctic Fuse 3 spotlight widgets from user-selected Umbrella video folders, Android app shortcuts, Watch Later and favourites, and navigation icons.</description>
+    <platform>all</platform>
+    <license>MIT (code; see bundled artwork notices)</license>
+  </extension>
+</addon></addons>
