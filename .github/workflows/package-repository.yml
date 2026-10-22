@@ -109,7 +109,6 @@ jobs:
           ids = [a.get('id') for a in root.findall('addon')]
           if ids.count('skin.arctic.fuse.3') != 1:
               raise SystemExit('Expected exactly one Arctic Fuse 3 entry in addons.xml.')
-          ET.parse('repository.unifiedlists/addon.xml')
           PY
 
       - name: Publish ZIP files and repository index
