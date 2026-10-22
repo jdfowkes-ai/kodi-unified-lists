@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<addons><addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.7.5" provider-name="Kodi Unified Lists">
+<addons><addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.7.6" provider-name="Kodi Unified Lists">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
   </requires>
@@ -17,8 +17,8 @@
     </menu>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en_GB">Umbrella spotlight feeds, local lists, apps and icons</summary>
-    <description lang="en_GB">Provides per-app Arctic Fuse 3 spotlight widgets from user-selected Umbrella video folders, Android app shortcuts, Watch Later and favourites, and navigation icons.</description>
+    <summary lang="en_GB">Video add-on spotlight feeds, local lists, apps and icons</summary>
+    <description lang="en_GB">Provides per-app Arctic Fuse 3 spotlight widgets from user-selected installed video add-on folders, Android app shortcuts, Watch Later and favourites, and navigation icons.</description>
     <platform>all</platform>
     <license>MIT (code; see bundled artwork notices)</license>
   </extension>
