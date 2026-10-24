@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<addons><addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.7.8" provider-name="Kodi Unified Lists">
+<addons><addon id="plugin.program.unifiedlists" name="Unified Local List Manager" version="0.7.9" provider-name="Kodi Unified Lists">
   <requires>
     <import addon="xbmc.python" version="3.0.0" />
   </requires>
