@@ -22,7 +22,7 @@
     <platform>all</platform>
     <license>MIT (code; see bundled artwork notices)</license>
   </extension>
-</addon><addon id="skin.arctic.fuse.3" name="Arctic Fuse 3" provider-name="jurialmunkey" version="3.4.33">
+</addon><addon id="skin.arctic.fuse.3" name="Arctic Fuse 3" provider-name="jurialmunkey" version="3.4.34">
     <requires>
         <import addon="xbmc.gui" version="5.17.0" />
         <import addon="script.skinvariables" version="2.2.9" />
@@ -64,5 +64,4 @@
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon><!-- Rebuild Kodi packages from the latest Arctic Fuse 3 source. -->
-</addons>
+</addon></addons>
