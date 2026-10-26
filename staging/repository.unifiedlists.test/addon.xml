@@ -9,7 +9,7 @@
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary lang="en_GB">Arctic Fuse test builds</summary>
-    <description lang="en_GB">Private test feed for checking Arctic Fuse changes before main-repository publication.</description>
+    <description lang="en_GB">Test feed for checking Arctic Fuse changes before main-repository publication.</description>
     <platform>all</platform>
   </extension>
 </addon>
