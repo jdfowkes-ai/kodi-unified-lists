@@ -64,4 +64,5 @@
             <fanart>fanart.jpg</fanart>
         </assets>
     </extension>
-</addon></addons>
+</addon><!-- Rebuild Kodi packages from the latest Arctic Fuse 3 source. -->
+</addons>
