@@ -6,7 +6,6 @@ on:
     branches:
       - main
     paths:
-      - addons.xml
       - .github/workflows/checksum.yml
   workflow_dispatch:
 
