@@ -11,6 +11,7 @@ on:
       - 'repository.unifiedlists/**'
       - 'skin.arctic.fuse.3/**'
       - '.github/workflows/package-repository.yml'
+      - '.build-source/**'
 
 permissions:
   contents: write
@@ -44,6 +45,18 @@ jobs:
 
           test -f repository.unifiedlists/addon.xml
           test -f skin-source/addon.xml
+          test -f .build-source/plugin.program.unifiedlists/addon.xml
+
+          CURRENT_PLUGIN_VERSION=$(python3 - <<'PY'
+          import xml.etree.ElementTree as ET
+          root = ET.parse('addons.xml').getroot()
+          addon = next(a for a in root.findall('addon')
+                       if a.get('id') == 'plugin.program.unifiedlists')
+          print(addon.get('version'))
+          PY
+          )
+          CURRENT_PLUGIN_ZIP="plugin.program.unifiedlists-${CURRENT_PLUGIN_VERSION}.zip"
+          test -f "$CURRENT_PLUGIN_ZIP"
 
           python3 - <<'PY'
           import copy
@@ -52,15 +65,19 @@ jobs:
           index_path = 'addons.xml'
           index = ET.parse(index_path).getroot()
           skin = ET.parse('skin-source/addon.xml').getroot()
+          plugin = ET.parse('.build-source/plugin.program.unifiedlists/addon.xml').getroot()
           if skin.tag != 'addon' or skin.get('id') != 'skin.arctic.fuse.3':
               raise SystemExit('The checked out source is not Arctic Fuse 3.')
+          if plugin.tag != 'addon' or plugin.get('id') != 'plugin.program.unifiedlists':
+              raise SystemExit('The Unified Lists source addon.xml is invalid.')
 
-          for existing in index.findall('addon'):
-              if existing.get('id') == skin.get('id'):
-                  index.remove(existing)
-          index.append(copy.deepcopy(skin))
+          for addon in (plugin, skin):
+              for existing in index.findall('addon'):
+                  if existing.get('id') == addon.get('id'):
+                      index.remove(existing)
+              index.append(copy.deepcopy(addon))
           ET.ElementTree(index).write(index_path, encoding='utf-8', xml_declaration=True)
-          print(f"Added {skin.get('id')} {skin.get('version')} to addons.xml")
+          print(f"Added {plugin.get('id')} {plugin.get('version')} and {skin.get('id')} {skin.get('version')} to addons.xml")
           PY
 
           SKIN_VERSION=$(python3 - <<'PY'
@@ -80,7 +97,16 @@ jobs:
           PY
           )
           PLUGIN_ZIP="plugin.program.unifiedlists-${PLUGIN_VERSION}.zip"
-          test -f "$PLUGIN_ZIP"
+          if [ ! -f "$PLUGIN_ZIP" ]; then
+            BUILD_DIR=$(mktemp -d)
+            unzip -q "$CURRENT_PLUGIN_ZIP" -d "$BUILD_DIR"
+            test -d "$BUILD_DIR/plugin.program.unifiedlists"
+            cp -R .build-source/plugin.program.unifiedlists/. \
+              "$BUILD_DIR/plugin.program.unifiedlists/"
+            (cd "$BUILD_DIR" && zip -qr "$GITHUB_WORKSPACE/$PLUGIN_ZIP" plugin.program.unifiedlists)
+          fi
+          unzip -tq "$PLUGIN_ZIP"
+          echo "PLUGIN_ZIP=$PLUGIN_ZIP" >> "$GITHUB_ENV"
 
           md5sum addons.xml | cut -d ' ' -f1 > addons.xml.md5
 
@@ -123,6 +149,7 @@ jobs:
           git add addons.xml
           git add addons.xml.md5
           git add repository.unifiedlists-1.0.0.zip
+          git add "$PLUGIN_ZIP"
           git add plugin.program.unifiedlists/
           git add skin.arctic.fuse.3/
 
