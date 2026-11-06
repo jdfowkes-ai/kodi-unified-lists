@@ -314,6 +314,19 @@ def umbrella_favourites():
     ])
 
 
+def umbrella_widgets():
+    """Expose Umbrella-owned progress and episode lists for home widgets."""
+    umbrella_group([
+        ('Continue Movies', 'plugin://plugin.video.umbrella/?action=moviesUnfinished'),
+        ('Continue TV Episodes', 'plugin://plugin.video.umbrella/?action=episodesUnfinished'),
+        ('TV Series Progress / Next Episode', 'plugin://plugin.video.umbrella/?action=shows_progress'),
+        ('Up Next Episodes', 'plugin://plugin.video.umbrella/?action=upcomingProgress'),
+        ('Finished Movies', 'plugin://plugin.video.umbrella/?action=local_finish_watching_movies'),
+        ('Finished TV Episodes', 'plugin://plugin.video.umbrella/?action=local_finish_watching_episodes'),
+        ('Finished TV Shows', 'plugin://plugin.video.umbrella/?action=shows_watched'),
+    ])
+
+
 def main():
     action = PARAMS.get('action', '')
     if action in ('certificate_icons', 'certificate_restore'):
@@ -359,6 +372,8 @@ def main():
         watch_later_view.run_action()
     elif action == 'favourites':
         umbrella_favourites()
+    elif action == 'umbrella_widgets':
+        umbrella_widgets()
     elif action == 'play_external':
         play_external_item()
     elif action == 'play_new':
@@ -373,7 +388,7 @@ def main():
     elif action == 'list':
         show_list(PARAMS.get('list', ''))
     elif action == 'tmdbhelper':
-        xbmc.executebuiltin('Container.Update(%s)' % PARAMS.get('path', 'plugin://plugin.video.themoviedb.helper/'))
+        xbmc.executebuiltin('Container.Update(%s)' % PARAMS.get('path', 'plugin://plugin.video.umbrella/'))
     elif action in ('add', 'remove'):
         change(action == 'add')
     elif action == 'details':
@@ -386,10 +401,7 @@ def main():
         item('Watch Later', url(action='list', list='Watch Later'))
         item('Favourites', url(action='list', list='Favourites'))
         item('Umbrella Favourites', url(action='favourites'))
-        item('Continue Watching', 'plugin://plugin.video.themoviedb.helper/?info=trakt_inprogress')
-        item('Watchlist', 'plugin://plugin.video.themoviedb.helper/?info=trakt_watchlist')
-        item('Up Next', 'plugin://plugin.video.themoviedb.helper/?info=trakt_nextepisodes')
-        item('My TMDb Lists', 'plugin://plugin.video.themoviedb.helper/?info=tmdb_v4_lists')
+        item('Umbrella Widgets', url(action='umbrella_widgets'))
         for list_name in list_names(include_defaults=False):
             item(list_name, url(action='list', list=list_name))
         item('My Lists', url(action='manage_lists'))
