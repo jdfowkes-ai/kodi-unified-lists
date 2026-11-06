@@ -185,7 +185,7 @@ jobs:
           git add addons.xml
           git add addons.xml.md5
           git add repository.unifiedlists-1.0.0.zip
-          git add "$PLUGIN_ZIP"
+          git add -A -- '*.zip'
           git add plugin.program.unifiedlists/
           git add skin.arctic.fuse.3/
 
