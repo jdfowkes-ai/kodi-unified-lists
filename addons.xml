@@ -13,7 +13,7 @@
   </menu>
  </extension>
  <extension point="xbmc.addon.metadata"><summary lang="en_GB">Local lists, app spotlights and icons</summary><description lang="en_GB">Provides Android app shortcuts with per-app video spotlights, local Watch Later and favourites, UK certificate icons, and navigation icons.</description><platform>all</platform><license>MIT (code; see bundled artwork notices)</license></extension>
-</addon><addon id="skin.arctic.fuse.3" name="Arctic Fuse 3" provider-name="jurialmunkey" version="3.4.47">
+</addon><addon id="skin.arctic.fuse.3" name="Arctic Fuse 3" provider-name="jurialmunkey" version="3.4.48">
     <requires>
         <import addon="xbmc.gui" version="5.17.0" />
         <import addon="script.skinvariables" version="2.2.9" />
