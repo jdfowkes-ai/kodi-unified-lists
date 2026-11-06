@@ -115,6 +115,32 @@ jobs:
           git -C skin-source archive --format=zip \
             --prefix=skin.arctic.fuse.3/ HEAD > "$SKIN_ZIP"
           unzip -tq "$SKIN_ZIP"
+          python3 - "$SKIN_ZIP" "$SKIN_VERSION" <<'PY'
+          import sys
+          import xml.etree.ElementTree as ET
+          from zipfile import ZipFile
+
+          archive_path, expected_version = sys.argv[1:]
+          with ZipFile(archive_path) as archive:
+              names = set(archive.namelist())
+              addon_path = 'skin.arctic.fuse.3/addon.xml'
+              addon = ET.fromstring(archive.read(addon_path))
+              if addon.get('version') != expected_version:
+                  raise SystemExit('Skin archive version does not match addon.xml.')
+              for name in names:
+                  if name.lower().endswith('.xml'):
+                      try:
+                          ET.fromstring(archive.read(name))
+                      except ET.ParseError as exc:
+                          raise SystemExit(f'Invalid XML in {name}: {exc}')
+              info = archive.read('skin.arctic.fuse.3/1080i/Includes_Info.xml').decode('utf-8')
+              if '$PARAM[container]$PARAM[listitem].Genre' not in info:
+                  raise SystemExit('The skin info panel is missing genre display.')
+              for code in ('U', 'PG', '12', '12A', '15', '18', 'R18', 'UC', 'A', 'AA', 'X'):
+                  icon = 'skin.arctic.fuse.3/media/flags/color/mpaa/UK ' + code + '.png'
+                  if icon not in names:
+                      raise SystemExit(f'Missing UK certificate icon: {icon}')
+          PY
           cp "$SKIN_ZIP" skin.arctic.fuse.3/
 
           python3 - <<'PY'
