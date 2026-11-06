@@ -317,13 +317,13 @@ def umbrella_favourites():
 def umbrella_widgets():
     """Expose Umbrella-owned progress and episode lists for home widgets."""
     umbrella_group([
-        ('Continue Movies', 'plugin://plugin.video.umbrella/?action=moviesUnfinished'),
-        ('Continue TV Episodes', 'plugin://plugin.video.umbrella/?action=episodesUnfinished'),
-        ('TV Series Progress / Next Episode', 'plugin://plugin.video.umbrella/?action=shows_progress'),
-        ('Up Next Episodes', 'plugin://plugin.video.umbrella/?action=upcomingProgress'),
-        ('Finished Movies', 'plugin://plugin.video.umbrella/?action=local_finish_watching_movies'),
-        ('Finished TV Episodes', 'plugin://plugin.video.umbrella/?action=local_finish_watching_episodes'),
-        ('Finished TV Shows', 'plugin://plugin.video.umbrella/?action=shows_watched'),
+        ('Continue Movies (Trakt)', 'plugin://plugin.video.umbrella/?action=moviesUnfinished'),
+        ('Continue TV Episodes (Trakt)', 'plugin://plugin.video.umbrella/?action=episodesUnfinished'),
+        ('Series Progress / Next Episode (Trakt)', 'plugin://plugin.video.umbrella/?action=shows_progress'),
+        ('Up Next (Upcoming Episodes)', 'plugin://plugin.video.umbrella/?action=upcomingProgress'),
+        ('Finished Movies (Kodi Library)', 'plugin://plugin.video.umbrella/?action=local_finish_watching_movies'),
+        ('Finished TV Episodes (Kodi Library)', 'plugin://plugin.video.umbrella/?action=local_finish_watching_episodes'),
+        ('Finished TV Shows (Trakt)', 'plugin://plugin.video.umbrella/?action=shows_watched'),
     ])
 
 
