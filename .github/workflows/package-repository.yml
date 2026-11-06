@@ -143,6 +143,16 @@ jobs:
           PY
           cp "$SKIN_ZIP" skin.arctic.fuse.3/
 
+          # The repository index only serves the active add-on versions. Keeping
+          # every old 60 MB skin archive makes the GitHub Pages site exceed 3 GB.
+          find plugin.program.unifiedlists -maxdepth 1 -type f \
+            -name 'plugin.program.unifiedlists-*.zip' ! -name "$PLUGIN_ZIP" -delete
+          find skin.arctic.fuse.3 -maxdepth 1 -type f \
+            -name 'skin.arctic.fuse.3-*.zip' ! -name "$SKIN_ZIP" -delete
+          find . -maxdepth 1 -type f \
+            -name 'plugin.program.unifiedlists-*.zip' ! -name "$PLUGIN_ZIP" -delete
+          find . -maxdepth 1 -type f -name 'skin.arctic.fuse.3-*.zip' -delete
+
           python3 - <<'PY'
           from pathlib import Path
           from zipfile import ZIP_DEFLATED, ZipFile
