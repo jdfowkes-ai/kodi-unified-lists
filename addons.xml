@@ -13,7 +13,7 @@
   </menu>
  </extension>
  <extension point="xbmc.addon.metadata"><summary lang="en_GB">Umbrella playback widgets, local lists and UK certificate icons</summary><description lang="en_GB">Provides Umbrella-native playback, progress and widget routes, user-managed local lists, Watch Later, favourites and UK certificate icons.</description><platform>all</platform><license>MIT (code; see bundled artwork notices)</license></extension>
-</addon><addon id="skin.arctic.fuse.3" name="Arctic Fuse 3" provider-name="jurialmunkey" version="3.4.48">
+</addon><addon id="skin.arctic.fuse.3" name="Arctic Fuse 3" provider-name="jurialmunkey" version="3.4.49">
     <requires>
         <import addon="xbmc.gui" version="5.17.0" />
         <import addon="script.skinvariables" version="2.2.9" />
