@@ -1,5 +1,7 @@
 name: Package Kodi Repository
 
+# Publish the current skin source version to the Kodi repository.
+
 on:
   workflow_dispatch:
   push:
